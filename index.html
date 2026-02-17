@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniSphere | Everything Under One Roof</title>
+    <style>
+        :root {
+            --primary: #1a2a3a;
+            --accent: #ffb400;
+            --text-light: #ffffff;
+            --bg-light: #f4f4f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-light);
+            color: #333;
+        }
+
+        /* Anti-Frustration Header */
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+
+        .search-bar {
+            flex-grow: 0.6;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+
+        .search-btn {
+            background: var(--accent);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* One-Roof Categories */
+        .nav-cats {
+            background: #fff;
+            padding: 10px 5%;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        .nav-cats a { text-decoration: none; color: #555; font-weight: 500; white-space: nowrap; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+
+        .cta-btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            font-size: 1.2rem;
+        }
+
+        /* Product Grid */
+        .container { padding: 40px 5%; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card img { max-width: 100%; border-radius: 5px; }
+
+        /* Grievance & Tracking Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 5%;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links a { color: var(--accent); text-decoration: none; }
+
+        .tracking-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--accent);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-decoration: none;
+            font-weight: bold;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">OmniSphere</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for everything... (e.g. iPhone, Groceries, Shoes)">
+        <button class="search-btn">Search</button>
+    </div>
+    <div>Cart (0) | Help</div>
+</header>
+
+<nav class="nav-cats">
+    <a href="#">Electronics</a>
+    <a href="#">Home & Kitchen</a>
+    <a href="#">Fashion</a>
+    <a href="#">Daily Essentials</a>
+    <a href="#">Books</a>
+    <a href="#">Sports</a>
+    <a href="#">Toys</a>
+</nav>
+
+<section class="hero">
+    <h1>Everything You Need. Under One Roof.</h1>
+    <p>Zero Ads. Lightning Fast. Friendly for Everyone.</p><br>
+    <a href="#" class="cta-btn">Start Shopping</a>
+</section>
+
+<div class="container">
+    <h2>Trending Categories</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>Premium Tech</h3>
+            <p>Fast Responding Devices</p>
+            <button>Explore</button>
+        </div>
+        <div class="card">
+            <h3>Daily Groceries</h3>
+            <p>Freshness Delivered</p>
+            <button>Explore</button>
+        </div>
+        <div class="card">
+            <h3>Home Decor</h3>
+            <p>Style Your Space</p>
+            <button>Explore</button>
+        </div>
+        <div class="card">
+            <h3>Health & Care</h3>
+            <p>For All Age Groups</p>
+            <button>Explore</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <div>
+            <h4>Support</h4>
+            <a href="#">Track Order</a><br>
+            <a href="#">Payment Methods</a>
+        </div>
+        <div>
+            <h4>Customer Care</h4>
+            <a href="#" style="color: #ff4444; font-weight: bold;">File a Grievance (Resolution Portal)</a>
+        </div>
+        <div>
+            <h4>About OmniSphere</h4>
+            <p>The smartest, ad-free marketplace.</p>
+        </div>
+    </div>
+</footer>
+
+<a href="#" class="tracking-btn">📦 Track My Order</a>
+
+</body>
+</html>

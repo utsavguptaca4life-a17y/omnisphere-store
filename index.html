@@ -3,98 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omni Store | Beyond Shopping</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Omnistore | Inventory Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0a0a0c; color: #e2e8f0; }
+        .omni-gradient { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+        .pulse-online { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    </style>
 </head>
-<body>
+<body class="flex min-h-screen">
 
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">Omni<span>Store</span></div>
-            
-            <div class="search-bar">
-                <input type="text" placeholder="Search for products, brands and more...">
-                <button type="submit">🔍</button>
-            </div>
-
-            <nav class="nav-links">
-                <a href="#" class="nav-item">Login</a>
-                <a href="#" class="nav-item">Orders</a>
-                <a href="#" class="cart">🛒 <span>0</span></a>
-            </nav>
+    <aside class="w-64 omni-gradient border-r border-white/10 p-6 flex flex-col">
+        <div class="mb-10 text-2xl font-bold tracking-tighter text-blue-400">OMNISTORE</div>
+        <nav class="space-y-4 flex-1">
+            <a href="#" class="block p-3 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/20">Dashboard</a>
+            <a href="#" class="block p-3 rounded-xl hover:bg-white/5 transition">Inventory</a>
+            <a href="#" class="block p-3 rounded-xl hover:bg-white/5 transition">Analytics</a>
+        </nav>
+        <div class="mt-auto glass-panel p-4 rounded-xl text-xs text-slate-500 text-center">
+            System v2.4.0 <span class="text-green-500 ml-1">● Live</span>
         </div>
-    </header>
+    </aside>
 
-    <section class="categories-bar">
-        <div class="container">
-            <ul>
-                <li><a href="#">Electronics</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Home & Kitchen</a></li>
-                <li><a href="#">Beauty</a></li>
-                <li><a href="#">Best Sellers</a></li>
-            </ul>
-        </div>
-    </section>
-
-    <main>
-        <section class="hero-slider">
-            <div class="banner-content">
-                <h1>The Future of Shopping is Here</h1>
-                <p>Exclusive deals on Next-Gen Tech.</p>
-                <button class="cta-btn">Shop Now</button>
-            </div>
-        </section>
-
-        <section class="product-section container">
-            <div class="section-header">
-                <h2>Flash Deals</h2>
-                <a href="#" class="view-all">View All</a>
-            </div>
-
-            <div class="product-grid">
-                <article class="product-card">
-                    <div class="badge">Hot</div>
-                    <img src="https://via.placeholder.com/200" alt="Product Name">
-                    <div class="info">
-                        <h3>Omni-Tech Wireless Buds</h3>
-                        <p class="rating">⭐⭐⭐⭐☆ (2.5k)</p>
-                        <div class="price">
-                            <span class="curr-price">$49.99</span>
-                            <span class="old-price">$89.00</span>
-                        </div>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </article>
+    <main class="flex-1 p-10 overflow-y-auto">
+        <header class="flex justify-between items-center mb-12">
+            <h2 class="text-2xl font-semibold">Inventory Overview</h2>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <p class="text-xs text-slate-500">Last Sync</p>
+                    <p class="text-sm font-mono text-blue-400">Just Now</p>
                 </div>
-        </section>
-    </main>
+                <div class="h-2 w-2 rounded-full bg-green-500 pulse-online"></div>
+            </div>
+        </header>
 
-    <footer>
-        <div class="container footer-grid">
-            <div class="footer-col">
-                <h4>About Omni Store</h4>
-                <p>The world's most user-centric marketplace.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass-panel p-6 rounded-2xl group hover:border-blue-500/50 transition-all duration-300">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold">Wireless Headphones X1</h3>
+                        <p class="text-sm text-slate-400">SKU: OMNI-7721</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold border border-blue-500/20">ELECTRONICS</span>
+                </div>
+                
+                <div class="flex items-end justify-between">
+                    <div>
+                        <p class="text-3xl font-bold">142 <span class="text-sm text-slate-500 font-normal">units</span></p>
+                        <p class="text-green-400 text-xs mt-1">↑ 12% from last week</p>
+                    </div>
+                    <button class="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-400 transition">Manage</button>
+                </div>
             </div>
-            <div class="footer-col">
-                <h4>Help Center</h4>
-                <ul>
-                    <li><a href="#">Track Order</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Newsletter</h4>
-                <input type="email" placeholder="Enter your email">
-                <button>Subscribe</button>
+
+            <div class="glass-panel p-6 rounded-2xl border-orange-500/20">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-lg font-bold">Smart Watch Series 9</h3>
+                        <p class="text-sm text-slate-400">SKU: OMNI-9902</p>
+                    </div>
+                    <span class="px-3 py-1 rounded-lg bg-orange-500/10 text-orange-400 text-xs font-bold border border-orange-500/20">LOW STOCK</span>
+                </div>
+                
+                <div class="flex items-end justify-between">
+                    <div>
+                        <p class="text-3xl font-bold text-orange-500">08 <span class="text-sm text-slate-500 font-normal">units</span></p>
+                        <div class="w-32 h-1.5 bg-white/5 rounded-full mt-3 overflow-hidden">
+                            <div class="bg-orange-500 h-full w-[15%]"></div>
+                        </div>
+                    </div>
+                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-bold">Restock</button>
+                </div>
             </div>
         </div>
-        <div class="bottom-bar">
-            &copy; 2026 Omni Store. All Rights Reserved.
-        </div>
-    </footer>
+    </main>
 
 </body>
 </html>

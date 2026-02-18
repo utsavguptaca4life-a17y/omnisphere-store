@@ -3,83 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omnistore | Inventory Management</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>UniShop - Everything Under One Roof</title>
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0a0a0c; color: #e2e8f0; }
-        .omni-gradient { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); }
-        .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
-        .pulse-online { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        /* Reset & Variables - Fast, Modern Design */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #FF6B35; --secondary: #F7931E; --bg: #fff; --text: #333; --card-bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.6; color: var(--text); background: #f5f5f5; }
+        
+        /* Header - Flipkart Style */
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .header-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 1.8rem; font-weight: bold; }
+        .search-bar { flex: 1; max-width: 500px; margin: 0 2rem; position: relative; }
+        .search-input { width: 100%; padding: 0.8rem 1rem 0.8rem 3rem; border: none; border-radius: 25px; font-size: 1rem; }
+        .search-btn { position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #333; font-size: 1.2rem; cursor: pointer; }
+        .nav-icons { display: flex; gap: 1.5rem; }
+        .icon { cursor: pointer; position: relative; font-size: 1.2rem; }
+        .cart-count { position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;base64,...') center/cover; /* Add hero image */ height: 400px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .btn { background: var(--primary); color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; cursor: pointer; text-decoration: none; transition: transform 0.3s; }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Categories & Products - Grid like Amazon */
+        .section { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
+        .section h2 { margin-bottom: 2rem; font-size: 2rem; }
+        .categories, .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .category-card, .product-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s; cursor: pointer; }
+        .category-card:hover, .product-card:hover { transform: translateY(-10px); }
+        .card-img { width: 100%; height: 200px; background: #ddd; object-fit: cover; }
+        .card-body { padding: 1.5rem; }
+        .card-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .price { font-size: 1.5rem; color: var(--primary); font-weight: bold; }
+        .rating { color: #FFD700; margin: 0.5rem 0; }
+        .add-cart { width: 100%; margin-top: 1rem; }
+
+        /* Cart Modal */
+        .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; }
+        .modal-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; border-radius: 15px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .close { float: right; font-size: 2rem; cursor: pointer; }
+
+        /* Grievance Portal */
+        .grievance { background: #e3f2fd; padding: 2rem; border-radius: 10px; text-align: center; margin: 2rem 0; }
+        .grievance a { color: var(--primary); text-decoration: none; font-weight: bold; }
+
+        /* Footer */
+        footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 3rem; }
+        
+        /* Responsive - Every Age Group Friendly */
+        @media (max-width: 768px) { .header-top { flex-direction: column; gap: 1rem; } .search-bar { margin: 0; order: -1; width: 100%; } .hero h1 { font-size: 2rem; } }
+        .loading { text-align: center; padding: 2rem; } .error { color: red; text-align: center; }
     </style>
 </head>
-<body class="flex min-h-screen">
-
-    <aside class="w-64 omni-gradient border-r border-white/10 p-6 flex flex-col">
-        <div class="mb-10 text-2xl font-bold tracking-tighter text-blue-400">OMNISTORE</div>
-        <nav class="space-y-4 flex-1">
-            <a href="#" class="block p-3 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/20">Dashboard</a>
-            <a href="#" class="block p-3 rounded-xl hover:bg-white/5 transition">Inventory</a>
-            <a href="#" class="block p-3 rounded-xl hover:bg-white/5 transition">Analytics</a>
-        </nav>
-        <div class="mt-auto glass-panel p-4 rounded-xl text-xs text-slate-500 text-center">
-            System v2.4.0 <span class="text-green-500 ml-1">● Live</span>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="logo">🛒 UniShop</div>
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search products, brands & more... (Everything under one roof)">
+                <button class="search-btn" onclick="searchProducts()">🔍</button>
+            </div>
+            <div class="nav-icons">
+                <div class="icon" onclick="openCart()">🛒 <span class="cart-count" id="cartCount">0</span></div>
+                <div class="icon">👤 Login</div>
+            </div>
         </div>
-    </aside>
+    </header>
 
-    <main class="flex-1 p-10 overflow-y-auto">
-        <header class="flex justify-between items-center mb-12">
-            <h2 class="text-2xl font-semibold">Inventory Overview</h2>
-            <div class="flex items-center gap-4">
-                <div class="text-right">
-                    <p class="text-xs text-slate-500">Last Sync</p>
-                    <p class="text-sm font-mono text-blue-400">Just Now</p>
-                </div>
-                <div class="h-2 w-2 rounded-full bg-green-500 pulse-online"></div>
-            </div>
-        </header>
+    <!-- Hero -->
+    <section class="hero">
+        <div>
+            <h1>Welcome to UniShop</h1>
+            <p>Everything under one roof - Fast, Friendly & Secure Shopping</p>
+            <a href="#products" class="btn">Shop Now</a>
+        </div>
+    </section>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="glass-panel p-6 rounded-2xl group hover:border-blue-500/50 transition-all duration-300">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h3 class="text-lg font-bold">Wireless Headphones X1</h3>
-                        <p class="text-sm text-slate-400">SKU: OMNI-7721</p>
-                    </div>
-                    <span class="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold border border-blue-500/20">ELECTRONICS</span>
-                </div>
-                
-                <div class="flex items-end justify-between">
-                    <div>
-                        <p class="text-3xl font-bold">142 <span class="text-sm text-slate-500 font-normal">units</span></p>
-                        <p class="text-green-400 text-xs mt-1">↑ 12% from last week</p>
-                    </div>
-                    <button class="bg-white text-black px-4 py-2 rounded-lg text-sm font-bold hover:bg-blue-400 transition">Manage</button>
-                </div>
-            </div>
+    <!-- Categories -->
+    <section class="section">
+        <h2>Shop by Category</h2>
+        <div class="categories" id="categories">
+            <!-- Dynamic -->
+        </div>
+    </section>
 
-            <div class="glass-panel p-6 rounded-2xl border-orange-500/20">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h3 class="text-lg font-bold">Smart Watch Series 9</h3>
-                        <p class="text-sm text-slate-400">SKU: OMNI-9902</p>
-                    </div>
-                    <span class="px-3 py-1 rounded-lg bg-orange-500/10 text-orange-400 text-xs font-bold border border-orange-500/20">LOW STOCK</span>
-                </div>
-                
-                <div class="flex items-end justify-between">
-                    <div>
-                        <p class="text-3xl font-bold text-orange-500">08 <span class="text-sm text-slate-500 font-normal">units</span></p>
-                        <div class="w-32 h-1.5 bg-white/5 rounded-full mt-3 overflow-hidden">
-                            <div class="bg-orange-500 h-full w-[15%]"></div>
+    <!-- Products -->
+    <section class="section" id="productsSection">
+        <h2 id="productsTitle">Featured Products</h2>
+        <div class="products" id="products">
+            <!-- Dynamic -->
+        </div>
+        <div class="loading" id="loading">Loading products...</div>
+        <div class="error" id="error" style="display:none;"></div>
+    </section>
+
+    <!-- Grievance Portal -->
+    <section class="section">
+        <div class="grievance">
+            <h3>Need Help?</h3>
+            <p>File your grievance here: <a href="https://your-grievance-portal.com" target="_blank">Grievance Portal</a></p>
+            <p>Track Order: <input type="text" placeholder="Enter Order ID"> <button class="btn">Track</button></p>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <button class="btn" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 UniShop. All rights reserved. | No Ads, Pure Shopping Experience | Server Optimized for Speed</p>
+    </footer>
+
+    <script>
+        // Sample Data - Everything under one roof
+        let products = [
+            {id:1, name:'iPhone 16', price:79999, img:'📱', category:'Electronics', rating:4.8, reviews:1200},
+            {id:2, name:'Nike Shoes', price:4999, img:'👟', category:'Fashion', rating:4.5, reviews:850},
+            {id:3, name:'Laptop Dell', price:59999, img:'💻', category:'Electronics', rating:4.7, reviews:950},
+            {id:4, name:'Groceries Pack', price:999, img:'🛍️', category:'Grocery', rating:4.9, reviews:2000},
+            // Add 100+ more for real use
+        ];
+        let cart = [];
+        let filteredProducts = [...products];
+
+        // Load Products from Backend API or Local
+        async function loadProducts() {
+            try {
+                const res = await fetch('http://localhost:5000/api/products'); // Backend connect
+                products = await res.json();
+            } catch(e) { /* Use local if backend off */ }
+            displayProducts(products);
+        }
+
+        function displayProducts(prods) {
+            const container = document.getElementById('products');
+            container.innerHTML = '';
+            prods.forEach(p => {
+                const card = `
+                    <div class="product-card" onclick="viewProduct(${p.id})">
+                        <div class="card-img">${p.img || '🛒'}</div>
+                        <div class="card-body">
+                            <h3>${p.name}</h3>
+                            <div class="rating">⭐${p.rating} (${p.reviews} reviews)</div>
+                            <div class="price">₹${p.price}</div>
+                            <button class="add-cart btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
                         </div>
                     </div>
-                    <button class="bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-bold">Restock</button>
-                </div>
-            </div>
-        </div>
-    </main>
+                `;
+                container.innerHTML += card;
+            });
+            document.getElementById('loading').style.display = 'none';
+        }
 
-</body>
-</html>
+        // Search - Smart & Fast like Flipkart
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredProducts = products.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.category.toLowerCase().includes(query) ||
+                p.price.toString().includes(query)
+            );
+            displayProducts(filteredProducts);
+            document.getElementById('productsTitle').textContent = `Search Results for "${query}"`;
+        }
+
+        // Cart Functions
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            cart.push(prod);
+            document.getElementById('cartCount').textContent = cart.length;
+            alert('Added to cart! ✅');
+        }
+
+        function openCart() { 
+            document.getElementById('cartModal').style.display = 'block';
+            document.getElementById('cartItems').innerHTML = cart.map(item => `<div>${item.name} - ₹${item.price}</div>`).join('');
+        }
+        function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+        function checkout() { alert('Redirecting to payment...'); /* Integrate Razorpay/St

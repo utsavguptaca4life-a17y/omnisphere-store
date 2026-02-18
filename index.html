@@ -3,118 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OmniSphere | Everything Under One Roof</title>
-    <style>
-        /* Modern Design System */
-        :root { --main: #0f172a; --gold: #fbbf24; --text: #1e293b; --bg: #f1f5f9; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-        
-        /* Clean Anti-Ad Header */
-        header { background: var(--main); padding: 15px 5%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-        .logo { color: var(--gold); font-size: 24px; font-weight: 800; text-decoration: none; }
-        
-        .search-box { flex: 0.7; display: flex; background: white; border-radius: 8px; overflow: hidden; }
-        .search-box input { border: none; padding: 12px; width: 100%; outline: none; font-size: 16px; }
-        .search-box button { background: var(--gold); border: none; padding: 0 20px; cursor: pointer; font-weight: bold; }
-
-        /* Experience Sections */
-        .hero { background: var(--main); color: white; padding: 40px 5%; text-align: center; border-bottom: 4px solid var(--gold); }
-        .container { padding: 30px 5%; }
-        
-        /* Product Real-time Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .price { font-size: 20px; font-weight: bold; color: #059669; margin: 10px 0; }
-        
-        .buy-btn { width: 100%; background: var(--main); color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-
-        /* Floating Resolution Portal & Tracking */
-        .footer-actions { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .float-btn { padding: 12px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); text-align: center; }
-        .btn-track { background: var(--gold); color: var(--main); }
-        .btn-grievance { background: #ef4444; color: white; }
-
-        /* Toast Notification for Glitches */
-        #status-msg { visibility: hidden; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 15px 30px; border-radius: 50px; z-index: 1000; }
-        #status-msg.show { visibility: visible; animation: fadeInUp 0.5s; }
-        @keyframes fadeInUp { from {opacity: 0; bottom: 0;} to {opacity: 1; bottom: 30px;} }
-    </style>
+    <title>Omni Store | Beyond Shopping</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <a href="#" class="logo">OmniSphere</a>
-    <div class="search-box">
-        <input type="text" id="userSearch" placeholder="Search 1 Million+ Products..." onkeyup="realTimeSearch()">
-        <button>Search</button>
-    </div>
-</header>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">Omni<span>Store</span></div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more...">
+                <button type="submit">🔍</button>
+            </div>
 
-<section class="hero">
-    <h1>The World's Stock, Under One Roof.</h1>
-    <p>No Ads • No Glitches • Instant Response</p>
-</section>
-
-<div class="container">
-    <h2 id="view-title">Featured Inventory</h2>
-    <div class="grid" id="productDisplay">
+            <nav class="nav-links">
+                <a href="#" class="nav-item">Login</a>
+                <a href="#" class="nav-item">Orders</a>
+                <a href="#" class="cart">🛒 <span>0</span></a>
+            </nav>
         </div>
-</div>
+    </header>
 
-<div class="footer-actions">
-    <a href="#" class="float-btn btn-track" onclick="notify('Tracking System: Order is at Local Hub')">📦 Track Order</a>
-    <a href="https://forms.google.com" target="_blank" class="float-btn btn-grievance">⚠️ Grievance Portal</a>
-</div>
+    <section class="categories-bar">
+        <div class="container">
+            <ul>
+                <li><a href="#">Electronics</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Home & Kitchen</a></li>
+                <li><a href="#">Beauty</a></li>
+                <li><a href="#">Best Sellers</a></li>
+            </ul>
+        </div>
+    </section>
 
-<div id="status-msg"></div>
+    <main>
+        <section class="hero-slider">
+            <div class="banner-content">
+                <h1>The Future of Shopping is Here</h1>
+                <p>Exclusive deals on Next-Gen Tech.</p>
+                <button class="cta-btn">Shop Now</button>
+            </div>
+        </section>
 
+        <section class="product-section container">
+            <div class="section-header">
+                <h2>Flash Deals</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
 
-
-<script>
-    // यह आपका "Digital Warehouse" (Inventory) है
-    const inventory = [
-        { name: "Smartphone X1", price: "₹49,999", cat: "Electronics" },
-        { name: "Ultra Running Shoes", price: "₹2,999", cat: "Fashion" },
-        { name: "Organic Green Tea", price: "₹450", cat: "Grocery" },
-        { name: "Wireless Headphones", price: "₹1,500", cat: "Electronics" },
-        { name: "Modern Coffee Table", price: "₹5,200", cat: "Home" },
-        { name: "Cotton T-Shirt", price: "₹799", cat: "Fashion" }
-    ];
-
-    // Real-time Search Logic (Like Amazon/Flipkart)
-    function renderProducts(items) {
-        const display = document.getElementById('productDisplay');
-        display.innerHTML = '';
-        items.forEach(item => {
-            display.innerHTML += `
-                <div class="card">
-                    <small>${item.cat}</small>
-                    <h3>${item.name}</h3>
-                    <div class="price">${item.price}</div>
-                    <button class="buy-btn" onclick="notify('Processing Secure Payment...')">Buy Now</button>
+            <div class="product-grid">
+                <article class="product-card">
+                    <div class="badge">Hot</div>
+                    <img src="https://via.placeholder.com/200" alt="Product Name">
+                    <div class="info">
+                        <h3>Omni-Tech Wireless Buds</h3>
+                        <p class="rating">⭐⭐⭐⭐☆ (2.5k)</p>
+                        <div class="price">
+                            <span class="curr-price">$49.99</span>
+                            <span class="old-price">$89.00</span>
+                        </div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </article>
                 </div>
-            `;
-        });
-    }
+        </section>
+    </main>
 
-    function realTimeSearch() {
-        const query = document.getElementById('userSearch').value.toLowerCase();
-        const filtered = inventory.filter(p => p.name.toLowerCase().includes(query) || p.cat.toLowerCase().includes(query));
-        renderProducts(filtered);
-    }
-
-    // Smart Glitch Handling & Notifications
-    function notify(msg) {
-        const toast = document.getElementById("status-msg");
-        toast.innerText = msg;
-        toast.className = "show";
-        setTimeout(() => { toast.className = ""; }, 3000);
-    }
-
-    // Initial Load
-    renderProducts(inventory);
-</script>
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>About Omni Store</h4>
+                <p>The world's most user-centric marketplace.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Help Center</h4>
+                <ul>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <input type="email" placeholder="Enter your email">
+                <button>Subscribe</button>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            &copy; 2026 Omni Store. All Rights Reserved.
+        </div>
+    </footer>
 
 </body>
 </html>
